@@ -1,0 +1,18 @@
+version: "3"
+services:
+  sample-react-app-service:
+    container_name: sample-react-app
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    command: "npm start"  
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+    volumes: 
+      - ./:/app:rw
+      - sample_react_app_node_modules:/app/node_modules
+
+volumes:
+  sample_react_app_node_modules:
