@@ -1,9 +1,14 @@
 FROM node:latest as build
+COPY package.json /package.json
+RUN yarn
+
+ENV NODE_PATH=/node_modules
+ENV PATH=$PATH:/node_modules/.bin
+ENV NODE_ENV=production
+
 WORKDIR /app
-ADD package.json .
-RUN npm install
 COPY . .
-RUN npm run build
+RUN yarn build
 
 FROM nginx
 COPY --from=build /app/build /usr/share/nginx/html/
