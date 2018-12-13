@@ -13,6 +13,9 @@ case $1 in
   test)
     yarn test $@
     ;;
+  deploy)
+    yarn build && yarn deploy
+    ;;
   *)
     exec "$@"
     ;;
